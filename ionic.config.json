@@ -1,0 +1,8 @@
+{
+  "name": "impact",
+  "app_id": "3707deaa",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
