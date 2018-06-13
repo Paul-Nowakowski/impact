@@ -1,17 +1,89 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Impact&nbsp;<ion-icon name="car"></ion-icon></ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content class='bg' padding>
+
+
+
+
+
+  <ion-list inset *ngIf="showHistory">
+
+    <ion-item>
+      <ion-label>Vin Number:</ion-label>
+      <ion-input #vin type="text"></ion-input>
+    </ion-item>
+
+
+
+     <ion-item>
+        <button (click)="submitVin(vin.value)"full ion-button>Submit</button>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="car">
+
+      <ion-item *ngFor="let item of car">
+
+          <div>{{item.vin}}</div>
+          <div>{{item.make}}</div>
+          <div>{{item.model}}</div>
+          <div>{{item.year}}</div>
+        <img *ngFor="let img of item.images" [src]="img">
+      </ion-item>
+    </ion-list>
+
+    <button ion-button (click)="scan()">scan&nbsp; <ion-icon name="barcode"></ion-icon></button>
+    <button ion-button (click)="getReport()"> Get History&nbsp;<ion-icon name="paper"></ion-icon></button>
+
+<button ion-button (click)="reportImpact()">Report Impact&nbsp;<ion-icon name="camera"></ion-icon></button>
+<form [formGroup]="carData" (ngSubmit)="createCar()">
+<ion-list *ngIf="images">
+    <ion-item  *ngFor="let image of images">
+        <img [src]="image" *ngIf='image'>
+      </ion-item>
+</ion-list>
+  <ion-list inset *ngIf="showImpact">
+    <ion-item>
+      <button ion-button (click)="takePicture()">Snap</button>
+
+
+      <ion-textarea *ngIf='image' value="{{image}}" type="text"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vin Number:</ion-label>
+      <ion-input formControlName="vin" type="text"></ion-input>
+
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Make:</ion-label>
+      <ion-input formControlName="make" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Model:</ion-label>
+      <ion-input formControlName="model" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+    <ion-label>Year:</ion-label>
+    <ion-input formControlName="year" type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <button full ion-button>Submit</button>
+  </ion-item>
+
+  <ion-item>
+      <button full ion-button>From Library</button>
+    </ion-item>
+
+</ion-list>
+</form>
+<img src="https://image.shutterstock.com/image-photo/yellow-car-crash-on-white-260nw-657466993.jpg">
+
 </ion-content>
